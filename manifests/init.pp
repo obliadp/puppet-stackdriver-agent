@@ -8,7 +8,7 @@
 # ---
 #
 # [*apikey*]
-# - Default - NONE (REQUIRED)
+# - Default - NONE (REQUIRED for non gcp vm)
 # - Stackdriver API key
 #
 # [*svc*]
@@ -43,7 +43,6 @@ class stackdriver (
 
 ) {
 
-  validate_string ( $apikey )
   validate_array  ( $svc    )
 
   # Runtime class definitions
