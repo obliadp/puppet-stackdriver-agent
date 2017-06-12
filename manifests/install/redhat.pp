@@ -37,7 +37,7 @@ class stackdriver::install::redhat(
   $_osrelease = $facts['os']['release']['major']
 
   $repo = {
-    'baseurl'   => "http://repo.stackdriver.com/repo/el{$_osrelease}/$basearch/",
+    'baseurl'   => "http://repo.stackdriver.com/repo/el${_osrelease}/\$basearch/",
     'gpgkey'    => 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver',
     'descr'     => 'stackdriver',
     'enabled'   => 1,
