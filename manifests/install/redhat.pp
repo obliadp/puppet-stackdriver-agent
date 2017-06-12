@@ -33,18 +33,21 @@ class stackdriver::install::redhat(
 
   $pkg    = [ 'stackdriver-agent', 'stackdriver-extractor' ],
   $ensure = 'present',
+  $repo = {},
+
+) inherits stackdriver {
 
   $_osrelease = $facts['os']['release']['major']
 
-  $repo = {
-    'baseurl'   => "http://repo.stackdriver.com/repo/el${_osrelease}/\$basearch/",
-    'gpgkey'    => 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver',
-    'descr'     => 'stackdriver',
-    'enabled'   => 1,
-    'gpgcheck'  => 1,
-  },
-
-) inherits stackdriver {
+  unless empty($repo) {
+    $repo = {
+      'baseurl'   => "http://repo.stackdriver.com/repo/el${_osrelease}/\$basearch/",
+      'gpgkey'    => 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver',
+      'descr'     => 'stackdriver',
+      'enabled'   => 1,
+      'gpgcheck'  => 1,
+    }
+  }
 
   validate_array  ( $pkg    )
   validate_string ( $ensure )
